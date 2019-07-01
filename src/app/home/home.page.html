@@ -1,14 +1,25 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-title>
-      Ionic Blank
+      Users List
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <div>
+    <ion-card *ngFor="let x  of users">
+      <img [src]="x.picture.large" />
+      <ion-card-header>
+        <ion-card-subtitle>{{ x.email }}</ion-card-subtitle>
+        <ion-card-title>{{ x.name.title+" "+x.name.last+" "+x.name.first }}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-infinite-scroll threshold="3px" (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
+    
 </ion-content>
